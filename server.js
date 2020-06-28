@@ -11,7 +11,7 @@ const amqp = require('amqplib/callback_api');
 
 const regex = new RegExp(process.env.REGEX, "gm");
 let allMessage = []
-
+let stopRequestNew = false
 const defaultHeader = {
     headers: {
         "Accept": "application/json; charset=utf-8",
@@ -25,8 +25,8 @@ const defaultHeader = {
     }
 }
 
-fetchDataNumber = () => {
-    fetch(process.env.BASE_URL + "api/number ", defaultHeader)
+fetchDataNumber = (params) => {
+    fetch(process.env.BASE_URL + `api/number${params}`, defaultHeader)
         .then(res => res.json())
         .then(json => {
             if (json.message === "ok") parsingResponseAndSendData(json)
@@ -99,9 +99,9 @@ checkNumber = number => {
         if (total.length > 0) {
             let string = ""
             total.forEach(data => {
-               if(data.count > 1) {
-                   string = string + ` ${data.number}X${data.count}`
-               }
+                if (data.count > 1) {
+                    string = string + ` ${data.number}X${data.count}`
+                }
             })
             return `${string} ${number}`
         } else {
@@ -122,6 +122,12 @@ checkMessage = msg => {
     return uniq
 }
 
-cron.schedule("* * * * *", () => {
-    fetchDataNumber()
+cron.schedule("15-30 * * * * *", () => {
+    if (stopRequestNew) {
+        //reload new number every 5 minutes
+        fetchDataNumber("?")
+    } else {
+        //reload new number very 15-30 second
+        fetchDataNumber("?requestNew=1")
+    }
 });
