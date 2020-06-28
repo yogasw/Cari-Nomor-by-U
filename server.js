@@ -55,12 +55,12 @@ parsingResponseAndSendData = result => {
 
                 a = checkNumber(data.display_msisdn)
                 if (a && checkMessage(a)) {
+                    stopRequestNew = true
                     let message = {
                         "Target": process.env.TARGET_WA,
                         "Message": `Dapat Nomor by.U bagus nih ${a}`,
                         "Image": ""
                     }
-
                     channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)));
                     console.log(" [x] Sent %s", JSON.stringify(message));
                 }
