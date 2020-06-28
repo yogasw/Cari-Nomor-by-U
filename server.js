@@ -47,6 +47,7 @@ parsingResponseAndSendData = result => {
                 console.log("a", a)
                 console.log("buy", buy)
                 buyNumber(a)
+                sendMessage(a)
                 buy = false
             }
         }
@@ -110,7 +111,6 @@ this.job = cron.schedule("15 * * * * *", () => {
 
 buyNumber = number => {
     console.log(number)
-    sendMessage(number)
     if (this.job) {
         this.job.stop()
     }
