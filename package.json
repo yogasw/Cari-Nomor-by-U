@@ -1,0 +1,21 @@
+{
+  "name": "ByU",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -e ts  --exec \"npm run server\"",
+    "server": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.5.6",
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "node-cron": "^2.0.3",
+    "node-fetch": "^2.6.0"
+  }
+}
