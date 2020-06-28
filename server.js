@@ -99,7 +99,9 @@ checkNumber = number => {
         if (total.length > 0) {
             let string = ""
             total.forEach(data => {
-                string = string + ` ${data.number}X${data.count}`
+               if(data.count > 1) {
+                   string = string + ` ${data.number}X${data.count}`
+               }
             })
             return `${string} ${number}`
         } else {
