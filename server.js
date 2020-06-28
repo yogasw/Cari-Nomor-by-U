@@ -95,7 +95,7 @@ parsingResponseAndSendData = result => {
                     try {
                         buyNumber(a)
                     } catch (e) {
-                        
+
                     }
                     let message = {
                         "Target": process.env.TARGET_WA,
@@ -114,6 +114,7 @@ parsingResponseAndSendData = result => {
     });
 }
 checkNumber = number => {
+    console.log("Check Number " + number)
     if (regex.exec(number) !== null) {
         return number
     } else {
